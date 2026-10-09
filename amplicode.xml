@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AmplicodePersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="app" name="Default">
+        <packages>
+          <package value="rut.miit.servicedesk" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="catalog" name="Default" />
+      <persistence-unit moduleName="requests" name="Default" />
+      <persistence-unit moduleName="notifications" name="Default" />
+    </persistence-units>
+  </component>
+</project>
