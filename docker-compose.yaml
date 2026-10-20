@@ -26,7 +26,7 @@ services:
     ports:
       - "8180:8080"
     volumes:
-      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm.json:ro
+      - ./docker/keycloak/realm-export.json:/opt/keycloak/data/import/realm.json:ro
 
 #  app:
 #    build: .
