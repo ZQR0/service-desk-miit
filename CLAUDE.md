@@ -42,7 +42,7 @@ Each module follows a strict visibility pattern:
 ### Testing
 - **Run All Tests**: `mvn verify`
 - **Run Single Test**: `mvn test -Dtest=<TestClassName>`
-- **Architectural Validation**: The project uses ArchUnit (in `app` module) to enforce module boundaries. Ensure `mvn verify` passes to check for boundary violations.
+- **Architectural Validation**: The project uses ArchUnit to enforce module boundaries. Ensure `mvn verify` passes to check for boundary violations.
 
 ## Security & Authentication
 - **Provider**: Keycloak (OAuth2/JWT).
