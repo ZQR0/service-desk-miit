@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль</title>
+    <link rel="stylesheet" th:href="@{/css/request-details.css}">
+</head>
+<body>
+<main class="page">
+    <h1>Мой профиль</h1>
+    <div class="card">
+        <p><strong>Логин:</strong> <span th:text="${user.login}"></span></p>
+        <p><strong>ФИО:</strong> <span th:text="${user.displayName}"></span></p>
+        <p><strong>Роль:</strong> <span th:text="${user.role}"></span></p>
+        <p><strong>Кафедра:</strong> <span th:text="${user.department} ?: '—'"></span></p>
+    </div>
+    <h2>Смена пароля</h2>
+    <p th:if="${passwordChanged}" style="color: green;">Пароль обновлён.</p>
+    <form th:action="@{/profile/password}" th:object="${passwordForm}" method="post" class="card">
+        <label>Новый пароль <input th:field="*{password}" type="password" required></label>
+        <button type="submit">Сохранить пароль</button>
+    </form>
+    <p><a th:href="@{/users}" th:if="${user.role == 'ADMIN'}">Управление пользователями</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+    <link rel="stylesheet" th:href="@{/css/request-details.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="topbar__inner">
+        <span>Сервис-деск — пользователи</span>
+        <nav class="nav">
+            <a th:href="@{/profile}">Профиль</a>
+            <a th:href="@{/requests/by-author-id(authorId=1)}">Заявки</a>
+        </nav>
+    </div>
+</header>
+<main class="page">
+    <div class="title-row">
+        <h1>Пользователи</h1>
+        <a class="btn-create" th:href="@{/users/new}">+ Создать</a>
+    </div>
+    <p>
+        <a th:href="@{/departments/1/head}">Заведующий кафедры ИТ</a> ·
+        <a th:href="@{/departments/2/head}">Заведующий кафедры математики</a>
+    </p>
+    <div class="card table-card">
+        <table class="requests-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>ФИО</th>
+                <th>Роль</th>
+                <th>Кафедра</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users.content}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.login}">login</td>
+                <td th:text="${user.displayName}">ФИО</td>
+                <td th:text="${user.role}">ROLE</td>
+                <td th:text="${user.department} ?: '—'">Кафедра</td>
+                <td><a th:href="@{/users/{id}/edit(id=${user.id})}">Изменить</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
