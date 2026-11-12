@@ -22,7 +22,7 @@ import ru.miit.servicedesk.requests.repository.RequestRepository;
 import ru.miit.servicedesk.requests.repository.RequestStatusRepository;
 import ru.miit.servicedesk.users.RoleEntity;
 import ru.miit.servicedesk.users.UserEntity;
-import ru.miit.servicedesk.users.repository.AppUserRepository;
+import ru.miit.servicedesk.users.UserRepository;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -37,7 +37,7 @@ import static org.mockito.Mockito.*;
 class RequestServiceImplTest {
     @Mock private RequestRepository requestRepository;
     @Mock private RequestStatusRepository statusRepository;
-    @Mock private AppUserRepository userRepository;
+    @Mock private UserRepository userRepository;
     @Mock private AudienceRepository audienceRepository;
     @Mock private ServiceCatalogRepository catalogRepository;
     private RequestServiceImpl service;

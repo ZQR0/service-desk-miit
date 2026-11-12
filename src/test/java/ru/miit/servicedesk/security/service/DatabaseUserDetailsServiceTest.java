@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.miit.servicedesk.users.RoleEntity;
 import ru.miit.servicedesk.users.UserEntity;
-import ru.miit.servicedesk.users.repository.AppUserRepository;
+import ru.miit.servicedesk.users.UserRepository;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DatabaseUserDetailsServiceTest {
-    @Mock private AppUserRepository repository;
+    @Mock private UserRepository repository;
     private DatabaseUserDetailsService service;
 
     @BeforeEach
@@ -33,7 +33,7 @@ class DatabaseUserDetailsServiceTest {
         user.setLogin("dispatcher");
         user.setPasswordHash("encoded");
         user.setRole(role);
-        when(repository.findByLogin("dispatcher")).thenReturn(Optional.of(user));
+        when(repository.findByLoginIgnoreCase("dispatcher")).thenReturn(Optional.of(user));
 
         UserDetails result = service.loadUserByUsername("dispatcher");
 
@@ -44,7 +44,7 @@ class DatabaseUserDetailsServiceTest {
 
     @Test
     void loadUserByUsernameThrowsSpringExceptionWhenUserIsMissing() {
-        when(repository.findByLogin("missing")).thenReturn(Optional.empty());
+        when(repository.findByLoginIgnoreCase("missing")).thenReturn(Optional.empty());
         assertThatExceptionOfType(UsernameNotFoundException.class)
             .isThrownBy(() -> service.loadUserByUsername("missing"))
             .withMessage("User not found");
