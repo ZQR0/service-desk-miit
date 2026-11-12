@@ -6,22 +6,22 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.miit.servicedesk.users.UserMapper.UserMapper;
-import ru.miit.servicedesk.users.repository.AppUserRepository;
+import ru.miit.servicedesk.users.UserRepository;
 import ru.miit.servicedesk.users.UserEntity;
 
 @Service
 public class DatabaseUserDetailsService implements UserDetailsService {
 
-    private final AppUserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public DatabaseUserDetailsService(AppUserRepository userRepository) {
+    public DatabaseUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByLogin(login)
+        UserEntity user = userRepository.findByLoginIgnoreCase(login.trim())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return UserMapper.toUserDetails(user);
