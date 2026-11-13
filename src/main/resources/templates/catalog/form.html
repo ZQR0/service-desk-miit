@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle} + ' — Сервис-деск'">Услуга — Сервис-деск</title>
+    <link rel="stylesheet" th:href="@{/css/request-details.css}">
+    <link rel="stylesheet" th:href="@{/css/catalog.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar__inner">
+        <a class="brand" th:href="@{/catalog}">
+            <span class="brand__logo"></span>
+            Сервис-деск
+        </a>
+        <nav class="nav">
+            <a th:href="@{/catalog}">Каталог</a>
+            <a href="/requests">Мои заявки</a>
+            <a class="active" th:href="@{/catalog/admin}">Управление</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page page--narrow">
+
+    <div class="crumbs">
+        <a th:href="@{/catalog}">Каталог</a>
+        /
+        <a th:href="@{/catalog/admin}">Управление каталогом</a>
+        /
+        <span th:text="${pageTitle}">Новая услуга</span>
+    </div>
+
+    <div class="catalog-heading catalog-heading--form">
+        <div>
+            <p class="eyebrow">УПРАВЛЕНИЕ УСЛУГАМИ</p>
+            <h1 th:text="${pageTitle}">Новая услуга</h1>
+            <p class="muted">
+                Заполните основные сведения об услуге.
+                Пользователи увидят их в общем каталоге.
+            </p>
+        </div>
+    </div>
+
+    <form class="card catalog-form"
+          th:action="${formAction}"
+          th:object="${form}"
+          method="post">
+
+        <div class="alert"
+             th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="error : ${#fields.globalErrors()}"
+               th:text="${error}">
+                Ошибка сохранения
+            </p>
+        </div>
+
+        <div class="form-section">
+            <h2>Основная информация</h2>
+            <p class="form-hint">
+                Укажите название и описание услуги.
+            </p>
+
+            <div class="form-field">
+                <label for="nameService">
+                    Название услуги <span class="required">*</span>
+                </label>
+
+                <input class="control"
+                       id="nameService"
+                       type="text"
+                       maxlength="255"
+                       th:field="*{nameService}"
+                       placeholder="Например, Настройка рабочего места">
+
+                <div class="field-error"
+                     th:if="${#fields.hasErrors('nameService')}"
+                     th:errors="*{nameService}">
+                </div>
+
+                <small class="input-hint">
+                    Максимальная длина — 255 символов.
+                </small>
+            </div>
+
+            <div class="form-field">
+                <label for="description">Описание услуги</label>
+
+                <textarea class="control"
+                          id="description"
+                          rows="6"
+                          maxlength="4000"
+                          th:field="*{description}"
+                          placeholder="Опишите содержание услуги и что необходимо указать при оформлении заявки"></textarea>
+
+                <div class="field-error"
+                     th:if="${#fields.hasErrors('description')}"
+                     th:errors="*{description}">
+                </div>
+
+                <small class="input-hint">
+                    Необязательное поле. До 4000 символов.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Срок выполнения</h2>
+            <p class="form-hint">
+                Укажите нормативное время выполнения услуги.
+            </p>
+
+            <div class="form-field">
+                <label for="deadline">
+                    Нормативный срок, часов
+                    <span class="required">*</span>
+                </label>
+
+                <input class="control control--short"
+                       id="deadline"
+                       type="number"
+                       min="1"
+                       step="1"
+                       th:field="*{deadline}"
+                       placeholder="Например, 24">
+
+                <div class="field-error"
+                     th:if="${#fields.hasErrors('deadline')}"
+                     th:errors="*{deadline}">
+                </div>
+
+                <small class="input-hint">
+                    Значение должно быть положительным целым числом.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn--primary" type="submit">
+                Сохранить
+            </button>
+
+            <a class="btn btn--secondary"
+               th:href="@{/catalog/admin}">
+                Отмена
+            </a>
+        </div>
+
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${service.nameService} + ' — Сервис-деск'">
+        Услуга — Сервис-деск
+    </title>
+    <link rel="stylesheet" th:href="@{/css/request-details.css}">
+    <link rel="stylesheet" th:href="@{/css/catalog.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar__inner">
+        <a class="brand" th:href="@{/catalog}">
+            <span class="brand__logo"></span>
+            Сервис-деск
+        </a>
+
+        <nav class="nav">
+            <a class="active" th:href="@{/catalog}">Каталог</a>
+            <a href="/requests">Мои заявки</a>
+            <a href="#">Профиль</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page page--narrow">
+
+    <div class="crumbs">
+        <a th:href="@{/catalog}">Каталог услуг</a>
+        /
+        <span th:text="${service.nameService}">Название услуги</span>
+    </div>
+
+    <a class="back-link" th:href="@{/catalog}">
+        ← Вернуться в каталог
+    </a>
+
+    <section class="detail-hero">
+
+        <div class="catalog-icon catalog-icon--large"
+             aria-hidden="true">
+            ✦
+        </div>
+
+        <div class="detail-hero__content">
+            <p class="eyebrow">КАТАЛОГ УСЛУГ</p>
+
+            <h1 th:text="${service.nameService}">
+                Название услуги
+            </h1>
+
+            <span class="deadline-pill"
+                  th:text="'Нормативный срок: ' + ${service.deadline} + ' ч'">
+                Нормативный срок: 8 ч
+            </span>
+        </div>
+
+    </section>
+
+    <section class="card detail-card">
+
+        <div class="detail-section-heading">
+            <h2>Описание услуги</h2>
+        </div>
+
+        <p class="detail-description"
+           th:text="${service.description != null and !service.description.isBlank()
+                    ? service.description
+                    : 'Подробное описание услуги пока не добавлено.'}">
+            Описание услуги
+        </p>
+
+    </section>
+
+    <section class="card detail-card detail-info-card">
+
+        <h2>Информация о сроках</h2>
+
+        <div class="detail-info-row">
+            <span class="muted">Нормативный срок выполнения</span>
+            <strong th:text="${service.deadline + ' часов'}">
+                8 часов
+            </strong>
+        </div>
+
+    </section>
+
+    <section class="detail-action">
+
+        <div>
+            <strong>Нужна эта услуга?</strong>
+            <p class="muted">
+                Перейдите к оформлению заявки через раздел
+                «Мои заявки».
+            </p>
+        </div>
+
+        <a class="btn btn--primary" href="/requests">
+            Перейти к заявкам
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+</html>
