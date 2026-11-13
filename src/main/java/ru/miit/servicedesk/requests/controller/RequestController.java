@@ -45,7 +45,7 @@ public class RequestController {
         CreateRequestForm form = new CreateRequestForm();
         form.setAuthorId(authorId);
         model.addAttribute("form", form);
-        model.addAttribute("services", catalogService.listAll());
+        model.addAttribute("services", catalogService.findAll());
         model.addAttribute("audiences", audienceService.listAll());
         return "requests/form";
     }
@@ -63,7 +63,7 @@ public class RequestController {
                 bindingResult.reject("request.create.failed", e.getMessage());
             }
         }
-        model.addAttribute("services", catalogService.listAll());
+        model.addAttribute("services", catalogService.findAll());
         model.addAttribute("audiences", audienceService.listAll());
         return "requests/form";
     }
