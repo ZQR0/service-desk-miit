@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый пользователь</title>
+    <link rel="stylesheet" th:href="@{/css/request-details.css}">
+</head>
+<body>
+<main class="page">
+    <h1>Новый пользователь</h1>
+    <form th:action="@{/users}" th:object="${form}" method="post" class="card">
+        <label>Логин <input th:field="*{login}" required></label>
+        <label>Пароль <input th:field="*{password}" type="password" required></label>
+        <label>Имя <input th:field="*{name}" required></label>
+        <label>Фамилия <input th:field="*{lastName}" required></label>
+        <label>Отчество <input th:field="*{patronymic}"></label>
+        <label>Роль
+            <select th:field="*{roleId}" required>
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.nameRole}"></option>
+            </select>
+        </label>
+        <label>Кафедра
+            <select th:field="*{departmentId}">
+                <option value="">—</option>
+                <option th:each="dep : ${departments}" th:value="${dep.id}" th:text="${dep.name}"></option>
+            </select>
+        </label>
+        <button type="submit">Создать</button>
+        <a th:href="@{/users}">Отмена</a>
+    </form>
+</main>
+</body>
+</html>

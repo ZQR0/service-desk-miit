@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заведующий кафедрой</title>
+    <link rel="stylesheet" th:href="@{/css/request-details.css}">
+</head>
+<body>
+<main class="page">
+    <h1>Назначить заведующего</h1>
+    <p th:if="${currentHead != null}">
+        Сейчас: <span th:text="${currentHead.fullName}">ФИО</span>
+    </p>
+    <p th:if="${currentHead == null}">Заведующий не назначен.</p>
+    <form th:action="@{/departments/{id}/head(id=${departmentId})}" method="post" class="card">
+        <label>Кандидат
+            <select name="userId" required>
+                <option th:each="candidate : ${candidates}"
+                        th:value="${candidate.id}"
+                        th:text="${candidate.fullName}"
+                        th:selected="${candidate.id == selectedUserId}"></option>
+            </select>
+        </label>
+        <button type="submit">Назначить</button>
+        <a th:href="@{/users}">Назад</a>
+    </form>
+</main>
+</body>
+</html>

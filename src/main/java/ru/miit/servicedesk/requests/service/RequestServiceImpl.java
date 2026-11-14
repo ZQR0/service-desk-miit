@@ -16,7 +16,7 @@ import ru.miit.servicedesk.requests.repository.AudienceRepository;
 import ru.miit.servicedesk.requests.repository.RequestRepository;
 import org.springframework.data.domain.Pageable;
 import ru.miit.servicedesk.requests.repository.RequestStatusRepository;
-import ru.miit.servicedesk.users.repository.AppUserRepository;
+import ru.miit.servicedesk.users.UserRepository;
 import ru.miit.servicedesk.users.UserEntity;
 
 import java.time.OffsetDateTime;
@@ -27,12 +27,12 @@ import java.time.ZoneOffset;
 public class RequestServiceImpl implements RequestService{
     private final RequestRepository requestRepository;
     private final RequestStatusRepository requestStatusRepository;
-    private final AppUserRepository user;
+    private final UserRepository user;
     private final AudienceRepository audienceRepository;
     private final ServiceCatalogRepository catalogRepository;
 
 
-    public RequestServiceImpl(RequestRepository requestRepository, RequestStatusRepository requestStatusRepository, AppUserRepository user, AudienceRepository audienceRepository, ServiceCatalogRepository catalogRepository) {
+    public RequestServiceImpl(RequestRepository requestRepository, RequestStatusRepository requestStatusRepository, UserRepository user, AudienceRepository audienceRepository, ServiceCatalogRepository catalogRepository) {
         this.requestRepository = requestRepository;
         this.requestStatusRepository = requestStatusRepository;
         this.user = user;

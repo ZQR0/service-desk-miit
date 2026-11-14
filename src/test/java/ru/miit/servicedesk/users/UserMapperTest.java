@@ -19,6 +19,13 @@ class UserMapperTest {
     }
 
     @Test
+    void toShortOmitsNullPatronymic() {
+        UserEntity user = user();
+        user.setPatronymic(null);
+        assertThat(UserMapper.toShort(user).fullName()).isEqualTo("Иванов Иван");
+    }
+
+    @Test
     void toUserDetailsMapsCredentialsAndRole() {
         UserDetails result = UserMapper.toUserDetails(user());
         assertThat(result.getUsername()).isEqualTo("ivanov");
