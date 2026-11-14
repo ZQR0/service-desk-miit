@@ -30,6 +30,9 @@ public class ServiceCatalogEntity {
     @Column(name = "deadline")
     private Integer deadline;
 
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
+
     @OneToMany(mappedBy = "service")
     private Set<RequestEntity> requests = new LinkedHashSet<>();
 
@@ -64,6 +67,10 @@ public class ServiceCatalogEntity {
     public void setDeadline(Integer deadline) {
         this.deadline = deadline;
     }
+
+    public boolean isActive() { return active; }
+
+    public void setActive(boolean active) { this.active = active; }
 
     public Set<RequestEntity> getRequests() {
         return requests;

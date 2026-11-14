@@ -68,7 +68,7 @@ class RequestControllerTest {
     void createRequestBuildsPrefilledFormAndReferenceLists() {
         List<ServiceCatalogEntity> services = List.of(new ServiceCatalogEntity());
         List<AudienceEntity> audiences = List.of(new AudienceEntity());
-        when(catalogService.listAll()).thenReturn(services);
+        when(catalogService.findAll()).thenReturn(services);
         when(audienceService.listAll()).thenReturn(audiences);
 
         String view = controller.createRequest(11L, model);
@@ -102,7 +102,7 @@ class RequestControllerTest {
         List<ServiceCatalogEntity> services = List.of(new ServiceCatalogEntity());
         List<AudienceEntity> audiences = List.of(new AudienceEntity());
         when(bindingResult.hasErrors()).thenReturn(true);
-        when(catalogService.listAll()).thenReturn(services);
+        when(catalogService.findAll()).thenReturn(services);
         when(audienceService.listAll()).thenReturn(audiences);
 
         String view = controller.create(form, bindingResult, model);
@@ -119,7 +119,7 @@ class RequestControllerTest {
         when(bindingResult.hasErrors()).thenReturn(false);
         when(requestService.create(1L, 2L, 3L, "description"))
             .thenThrow(new IllegalArgumentException("Услуга не найдена"));
-        when(catalogService.listAll()).thenReturn(List.of());
+        when(catalogService.findAll()).thenReturn(List.of());
         when(audienceService.listAll()).thenReturn(List.of());
 
         String view = controller.create(form, bindingResult, model);

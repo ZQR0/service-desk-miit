@@ -83,7 +83,7 @@ class CatalogServiceImplTest {
     void listAllReturnsRepositoryResult() {
         List<ServiceCatalogEntity> entities = List.of(new ServiceCatalogEntity(), new ServiceCatalogEntity());
         when(repository.findAll()).thenReturn(entities);
-        assertThat(service.listAll()).isSameAs(entities);
+        assertThat(service.findAll()).isSameAs(entities);
     }
 
     @Test
